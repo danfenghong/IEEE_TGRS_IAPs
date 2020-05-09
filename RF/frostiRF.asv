@@ -1,0 +1,144 @@
+clear
+clc
+%%
+load PaviaU
+x1=double(paviaU);
+T = imread('TRpavia1.tif');
+T1 = imread('TSpavia.tif');
+T=TRpavia;
+[nx,ny,nz]=size(T);
+train_label=reshape(T,nx*ny,nz)';
+T1=TSpavia;
+%%
+ D = multibandread(...
+     'C:\Users\ber10\Dropbox\Pursuit\Dataset\Envidataset\SanDiego\sandiego_reflectance.img',...
+     [400 400 224], 'int16', 0, 'bsq', 'ieee-le');
+ D=cat(3,D(:,:,1:106),D(:,:,114:152),D(:,:,167:223));
+  T=double(enviread1('C:\Users\ber10\Dropbox\Pursuit\Dataset\Envidataset\SanDiego\sandiegoTR'));
+  T1=double(enviread1('C:\Users\ber10\Dropbox\Pursuit\Dataset\Envidataset\SanDiego\sandiego_gt'));
+x1=double(255*mat2gray(D));
+%load TRsandiego
+%load TSsandiego
+%T=train_set_im;
+[nx,ny,nz]=size(T);
+train_label=reshape(T,nx*ny,nz)';
+%T1=test_set_im;
+%%
+T=imread('Centre_Training_set.bmp');
+[nx,ny,nz]=size(T);
+train_label=reshape(T,nx*ny,nz)';
+xx1=enviread1('C:\Users\ber10\Dropbox\Pursuit\Dataset\Centre\Centre');
+%D=D(:,:,ii);
+%D=Dx_UWT11;
+%D=y_est_BM4D;
+T1=imread('Centre_Ground_Truth.bmp');
+%%
+T=imread('Roi_Hekla_image_TRAINING_temp123.tif');
+[nx,ny,nz]=size(T);
+train_label=reshape(T,nx*ny,nz)';
+x1=enviread1('C:\Users\ber10\Dropbox\Pursuit\Dataset\Hekla_HSI_data\Hekla');
+%D=D(:,:,ii);
+%x1=Dx_UWT11;
+%D=y_est_BM4D;
+T1=imread('Roi_Hekla_image_TEST_temp123.tif');
+%%
+%x1=y_est_PCA_OWT;
+%x1=y_est_BM3D_FORPDNT_Indian;
+%x1=y_est_BM4D_URBAN;
+%x1=y_est_FORP_wav_URBAN;
+%x1=y_est_BM4D;
+%x1=Dx_UWT11;
+%D=y_est_FORP_wav;
+%x1=y_est_BMD_pavia_uni;
+%%[V,PC]=PCA_image(x1);
+%D=cat(3,PC(:,:,1:6),PC(:,:,8),PC(:,:,10),PC(:,:,11),PC(:,:,12));
+%D=PC(:,:,1:8);
+%x1=xx1(:,:,1:6);
+%x1=y_est_FORP_sig_pavia_uni(:,:,1:6);
+[s1,s2,s3]=size(x1);
+Data=reshape(x1,s1*s2,s3)';
+
+ for i=1:s3
+     Data(i,:)=double(mat2gray(Data(i,:)));
+ end
+
+train_labels=double(train_label(train_label>0));
+X=Data(:,train_label>0);
+
+
+[nx1,ny1,nz1]=size(T1); 
+test_label=reshape(T1,nx1*ny1,nz1)';
+test_labels=double(test_label(test_label>0));
+X2=Data(:,test_label>0);
+
+x=X2';y=test_labels';
+
+model = classRF_train(X',train_labels',200);
+
+%res(:,ii) = classRF_predict(Data',model);
+res = classRF_predict(Data',model);
+%---------------------------
+
+t = classRF_predict(x,model);
+
+[sortedlabels,sidx]=sort(test_labels);
+
+Nc=length(unique(test_labels));
+
+for i=1:Nc
+    cl=find(sortedlabels==i);
+    s=cl(1);e=cl(length(cl));
+    sv=t(sidx);
+    pcl=sv(s:e);
+    for j=1:Nc
+        C(j,i)=length(find(pcl==j));
+    end
+    Cacc(i)=length(find(pcl==i))/length(pcl)*100;
+    clear cl pcl;
+end
+N=sum(sum(C));
+sumC=sum(C);
+sumR=sum(C');
+S=0;
+for i=1:Nc
+    acc(i)=C(i,i)/sumC(i)*100;
+    S=S+sumC(i)*sumR(i);
+end
+trace(C);
+meanacc=mean(acc)
+OA=trace(C)/N*100
+Po=trace(C)/N;
+Pe=S/N^2;
+kappa=(Po-Pe)/(1-Pe)*100
+%------------------------------
+res2=[];
+ figure
+ res2(:,:)=reshape(res,nx,ny);
+ imagesc(res2);
+ title(['Classification using RF,meanacc=',num2str(meanacc), ',OA=',num2str(OA), ',kappa=',num2str(kappa)])
+% figure
+% res2(:,:,ii)=reshape(res(:,ii),nx,ny);
+% imagesc(res2(:,:,ii));
+% title(['Classification using RF,meanacc=',num2str(meanacc), ',OA=',num2str(OA), ',kappa=',num2str(kappa)])
+%RFres2(:,:,ii)=res2;
+%end
+%%%%%%%%%%%%%%%%%Mejority of voting%%%%%%%%%%%%%
+% %%
+% s=size(res,1);
+% resMV=zeros(s,1);
+%  for i=1:s
+%  [a,b]=hist(res(i,:),unique(res(i,:)));
+%   [a1,b1]=max(a);
+%   majvot=b(b1);
+%   resMV(i,1)=majvot;
+%  end
+%  figure
+% resMajVot=reshape(resMV,s1,s2);
+% imagesc(resMajVot)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% %% k mean
+% Dr1=x1;
+% S=size(Dr1);
+% Dr2=reshape(Dr1,S(1)*S(2),S(3));
+% [IDX1,C1] = kmeans(Dr2,4);
+% figure;imagesc(reshape(IDX1,S(1),S(2)));colorbar;
