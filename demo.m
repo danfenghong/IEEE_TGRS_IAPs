@@ -2,7 +2,7 @@ clc;
 clear all;
 close all;
 
-addpath('data');
+addpath('Data');
 addpath('functions');
 addpath('RF');
 
