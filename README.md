@@ -41,26 +41,6 @@ If you want to run the code in your own data, you can accordingly change the inp
 If you encounter the bugs while using this code, please do not hesitate to contact us.
 
 
-Acknowledgment
----------------------
-
-We would like to thank Prof. Deng Cai, Dr. Tom Rainforth, and Prof. Chih-Chung Chang and Prof. Chih-Jen Lin for providing the Matlab Codes of LPP, CCF, and SVM, respectively. 
-Codes for these algorithms used in our paper can be found in the following.
-
-LPP: the code is available in http://www.cad.zju.edu.cn/home/dengcai/.
-
-CCF: the code is available in https://github.com/jandob/ccf.
-
-SVM: the code is available in https://www.csie.ntu.edu.tw/~cjlin/libsvm/oldfiles/index-1.0.html.
-
-If you want to use the codes mentioned above, please cite the corresponding articles as well.
-
-For the datasets used in our paper (Houston data and Chikusei data), you can  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;apply for the Univeristy of Houston hyperspectral dataset from [IEEE GRSS Data Fusion Contest 2013](http://www.grss-ieee.org/community/technical-committees/data-fusion/2013-ieee-grss-data-fusion-contest/);  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;download the Chikusei data from http://naotoyokoya.com/Download.html.
-
-Or please feel free to contact me if you are interested in such tasks.
-
 Licensing
 ---------
 
