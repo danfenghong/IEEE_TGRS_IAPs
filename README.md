@@ -6,7 +6,7 @@ Danfeng Hong, Xin Wu, Pedram Ghamisi, Jocelyn Chanussot, Naoto Yokoya, Xiaoxiang
 The code in this toolbox implements the ["Invariant Attribute Profiles: A Spatial-Frequency Joint Feature Extractor for Hyperspectral Image Classification"](https://ieeexplore.ieee.org/document/8961105).
 More specifically, it is detailed as follow.
 
-![alt text](./Motivations.png)
+![alt text](./FIFs.png)
 
 Citation
 ---------------------
