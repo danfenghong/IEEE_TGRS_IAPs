@@ -33,8 +33,8 @@ How to use it?
 Directly run demo.m to reproduce the results on the Houston2013 data, which exists in the aforementioned paper.  
 
 Note that the hyperspectral and simulated multispectral Houston2013 data can be downloaded from  
-[google drive](https://drive.google.com/open?id=1Inpi2_lHuvEWdJX_Duj9ild1_a0LHKmD)  
-[baiduyun](https://pan.baidu.com/s/10nyhL59pmkfxlYpATe0Vxw): 07tt (access code).
+[google drive](https://drive.google.com/open?id=19wIpGS9xv9K_-rVktdu6GL1CAXmuk-JK)  
+[baiduyun](https://pan.baidu.com/s/1_n-rYbzzGgCZRmDTOylCpg): ultz (access code).
 
 If you want to run the code in your own data, you can accordingly change the input (e.g., data) and tune the parameters.
 
