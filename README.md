@@ -28,6 +28,7 @@ Citation
 System-specific notes
 ---------------------
 The code was tested in Matlab R2016a or higher versions on Windows 10 machines.
+A image processing toolbox should be installed before running the code, which includes some necessary functions used in our paper, e.g., superpixels.
 
 How to use it?
 ---------------------
