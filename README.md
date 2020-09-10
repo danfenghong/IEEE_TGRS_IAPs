@@ -13,6 +13,8 @@ Citation
 
 **Please kindly cite the papers if this code is useful and helpful for your research.**
 
+Danfeng Hong, Xin Wu, Pedram Ghamisi, Jocelyn Chanussot, Naoto Yokoya, Xiao Xiang Zhu. Invariant Attribute Profiles: A Spatial-Frequency Joint Feature Extractor for Hyperspectral Image Classification, IEEE Transactions on Geoscience and Remote Sensing, 2020, 58(6): 3791-3808. 
+
      @article{hong2020invariant,
       title     = {Invariant Attribute Profiles: A Spatial-Frequency Joint Feature Extractor for Hyperspectral Image Classification},
       author    = {D. Hong and X. Wu and P. Ghamisi and J. Chanussot and N. Yokoya and X. Zhu},
