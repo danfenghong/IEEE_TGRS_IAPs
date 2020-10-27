@@ -101,7 +101,6 @@ f_g(:, :, 1) = f_g(:, :, 1) * 0.5;
 local_mag_g = unPad(local_mag_g, [om, on]);
 
 %% compute regional description by convolutions
-center_f_g = zeros(om, on, numel(order));
 template = triKERNEL;
 c_featureDetail = [];
 maxFreq=3;
@@ -143,7 +142,6 @@ for s = 1 : nScale
 end
 
 fHoG = reshape(fHoG, om * on, size(fHoG, 3));
-center_f_g = reshape(center_f_g, om * on, size(center_f_g, 3));
 
 iF_index = featureDetail(:, end) == 0;
 iF = fHoG(:, iF_index);
@@ -155,7 +153,7 @@ for i = 1 : size(iF, 2)
 end
 
 iF = [real(iF), imag(iF(:, ~ifreal))];
-mF = abs([fHoG(:, ~iF_index) center_f_g local_mag_g(:)]);
+mF = abs([fHoG(:, ~iF_index) local_mag_g(:)]);
 
 %% final output including three parts: orignial features, SIFs, and FIFs.
 Feature = [reshape(I,om*on,size(I,3)) reshape(New_I, om*on,size(New_I, 3)) iF mF];
